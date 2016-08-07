@@ -5,11 +5,10 @@ import urllib2
 from bs4 import BeautifulSoup
 import os
 import logging
-from soupselect import select
 import re
 import json
 
-def scrape_generic(url = 'http://www.iemoji.com/meanings-gallery/people'):
+def scrape_generic(url='http://www.iemoji.com/meanings-gallery/people'):
     arr =[]
     soup = BeautifulSoup( urllib2.urlopen(url).read() )
     for i in soup.find_all('div',{'class' : 'thumbnail'}):
@@ -17,6 +16,7 @@ def scrape_generic(url = 'http://www.iemoji.com/meanings-gallery/people'):
             a = i.find('a')
             text =  a.get_text()
             print text
+            continue
             link = a.get('href')
             emoji = scrape_link(link)
             if not emoji:
@@ -29,7 +29,6 @@ def scrape_generic(url = 'http://www.iemoji.com/meanings-gallery/people'):
     return arr
 
 def scrape_link(url='http://www.iemoji.com/view/emoji/1/people/smiling-face-with-open-mouth-and-smiling-eyes'):
-    url = 'http://www.iemoji.com/view/emoji/1/people/smiling-face-with-open-mouth-and-smiling-eyes'
     soup = BeautifulSoup( urllib2.urlopen(url).read() )
     for i in soup.find_all('input',{'id' : 'code'}):
         try:
@@ -59,8 +58,8 @@ def render():
 if __name__ == '__main__':
     #render()
     #scrape_link()
-    main()
-    #scrape_generic()
+    #main()
+    scrape_generic()
 
     
 
