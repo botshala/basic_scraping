@@ -50,17 +50,15 @@ def main():
 def render():
     f = open('output.json','r')
     a = json.loads(f.read())
-    arr =[]
-    for i in a:
-        arr.append([i[0].decode('utf-8','ignore'),i[1]])
+    
     
     g = open('b_output.json','w')
-    g.write(json.dumps(arr))
+    g.write(json.dumps(a, ensure_ascii=False).encode('utf8'))
 
 if __name__ == '__main__':
-    #render()
+    render()
     #scrape_link()
-    main()
+    #main()
     #scrape_generic()
 
     
